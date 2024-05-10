@@ -36,6 +36,7 @@ const Index = () => {
       if (post.id === postId) {
         const reactions = post.reactions[user.username] || [];
         if (!reactions.includes(emoji)) {
+          console.log(`Reaction added by ${user.username}: ${emoji}`);
           return { ...post, reactions: { ...post.reactions, [user.username]: [...reactions, emoji] } };
         }
       }
@@ -68,7 +69,7 @@ const Index = () => {
             <Text fontSize="xl">{post.title}</Text>
             <Text mt={4}>{post.body}</Text>
             <Text fontSize="sm">By {post.author} on {new Date(post.date).toLocaleDateString()}</Text>
-            <IconButton aria-label="React" icon={<FaRegSmile />} onClick={() => handleReaction(post.id, "smile")} />
+            <IconButton aria-label="React" icon={<FaRegSmile />} onClick={() => handleReaction(post.id, 'smile')} />
             {post.author === user?.username && <Button onClick={() => handleDeletePost(post.id)}>Delete</Button>}
           </Box>
         ))}
