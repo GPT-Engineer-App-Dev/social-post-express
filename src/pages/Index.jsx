@@ -68,6 +68,11 @@ const Index = () => {
           <Box key={post.id} p={4} shadow="md" borderWidth="1px">
             <Text fontSize="xl">{post.title}</Text>
             <Text mt={4}>{post.body}</Text>
+            <Box>
+              {Object.entries(post.reactions).map(([username, userReactions]) => (
+                <Text key={username}>{username}: {userReactions.join(', ')}</Text>
+              ))}
+            </Box>
             <Text fontSize="sm">By {post.author} on {new Date(post.date).toLocaleDateString()}</Text>
             <IconButton aria-label="React" icon={<FaRegSmile />} onClick={() => handleReaction(post.id, 'smile')} />
             {post.author === user?.username && <Button onClick={() => handleDeletePost(post.id)}>Delete</Button>}
